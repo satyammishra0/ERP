@@ -1,0 +1,53 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+Options -Indexes
+
+ErrorDocument 404 http://localhost/saaol/erp/404
+ErrorDocument 403 http://localhost/saaol/erp/404
+
+ReWriteRule ^$  pages/layouts-vertical.php [NC,L]
+ReWriteRule ^404$  pages/404.php [NC,L]
+ReWriteRule ^login/([a-zA-Z0-9]+)([/]?)$ pages/auth-login.php?_security_id=$1 [NC,L]
+ReWriteRule ^admin-login/([a-zA-Z0-9]+)([/]?)$ pages/admin-login.php?_security_id=$1 [NC,L]
+ReWriteRule ^logout([/]?)$ pages/auth-logout.php [NC,L]
+
+# Company Reviews Start
+
+
+
+
+# Company Reviews End
+
+
+ReWriteRule ^all-center-list([/]?)$ pages/all-center-list.php [NC,L]
+ReWriteRule ^patient-list([/]?)$ pages/patient-list.php [NC,L]
+ReWriteRule ^doctor-list([/]?)$ pages/doctor-list.php [NC,L]
+ReWriteRule ^report-details/([a-zA-Z0-9]+)([/]?)$ pages/report-details.php?_type=$1 [NC,L]
+# http://example.com/report-details/someReport123 --> http://example.com/pages/report-details.php?_type=someReport123
+ReWriteRule ^detox-treatment-list([/]?)$ pages/detox-treatment-list.php [NC,L]
+ReWriteRule ^new-center-list([/]?)$ pages/new_center_list.php [NC,L]
+ReWriteRule ^center-reports([/]?)$ pages/center-reports.php [NC,L]
+ReWriteRule ^login-details([/]?)$ pages/login-details.php [NC,L]
+ReWriteRule ^lead-fb([/]?)$ pages/lead-fb.php [NC,L]
+ReWriteRule ^dummy-data([/]?)$ pages/dummy-data.php [NC,L]
+
+
+
+# ReWriteRule ^patient-details([/]?)$ pages/patient-details.php [NC,L]
+ReWriteRule ^patient-details/([a-zA-Z0-9=-]+)([/]?)$ pages/patient-details.php?_pid=$1 [NC,L]
+
+ReWriteRule ^users([/]?)$ pages/Users.php [NC,L]
+ReWriteRule ^user-manage/([0-9]+)([/]?)$ pages/user-manage.php?_uid=$1 [NC,L]
+
+
+ReWriteRule ^consultation-details/([0-9]+)([/]?)$ pages/consultation-details.php?_hid=$1 [NC,L]
+
+
+ReWriteRule ^report-details/([a-zA-Z0-9]+)/([0-9]+)([/]?)$ pages/report-details.php?_type=$1&_hid=$2 [NC,L]
+
+# ReWriteRule ^test-center-reports/([a-zA-Z0-9]+)/([0-9]+)([/]?)$ pages/test-center-reports.php?_type=$1&_hid=$2 [NC,L]
+# ReWriteRule ^blogs([/]?)$ pages/blogs_list.php [NC,L]
+# ReWriteRule ^blogs/add([/]?)$ pages/add_blogs.php [NC,L]
+# ReWriteRule ^blogs/edit/([0-9]+)([/]?)$ pages/edit_blogs.php?_id=$1 [NC,L]
+
+
