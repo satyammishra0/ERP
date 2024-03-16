@@ -25,8 +25,8 @@ function getChartColorsArray(chartId) {
 }
 
 // This need to be changed in the prodcution
-const APP_URL = "https://erp.saaol.com/";
-// const APP_URL = "http://localhost/saaol/erp";
+// const APP_URL = "https://erp.saaol.com/";
+const APP_URL = "http://localhost/saaol/erp";
 
 // mini-1
 var barchartColors = getChartColorsArray("mini-1");

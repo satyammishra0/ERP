@@ -162,7 +162,7 @@ foreach ($ResultsList as $row) {
     $nestedData[] = $center_name;  // Center Name
     $nestedData[] = $recommended_values;  // Recomended EECP || STD  value
     $nestedData[] = $added_on; // Added date
-    $nestedData[] = "<a href='" . home_path() . '/patient-details/' .  base64_encode($row['patient_unique_id']) . "'>View Patient Details</a>"; //Link to all details
+    $nestedData[] = "<a style='color:#3980c0;' href='" . home_path() . '/patient-details/' .  base64_encode($row['patient_unique_id']) . "'>View Patient Details</a>"; //Link to all details
 
 
     $data[] = $nestedData;

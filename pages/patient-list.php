@@ -60,91 +60,100 @@ function get_manager_details_case_center_type($DB)
                     // include 'layouts/breadcrumb.php'; 
                     ?>
                     <!-- end page title -->
-                    <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex"><i class="bx bx-left-arrow-alt fs-4"></i> Back</button>
+                    <div class="d-flex" style="display:flex;align-items:center;">
+                        <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
+                        <h3 class="new-center-heading text-muted ml-3 ms-3">All Patient List</h3>
+                    </div>
+
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col-md-3">
-                                            <div class="mb-3">
-                                                <!--<a href="javascript:void(0);" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-plus me-2"></i> Add New</a>-->
-                                                <h3 class="new-center-heading text-muted mb-0">All Patient List</h3>
+                                    <div class="row mb-2  pt-2 pb-2 ">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="" style="display:flex;align-items:center;">
+                                                    <div style="width:30%;">
+                                                        <lable>Select Center Type: </lable>
+                                                    </div>
+                                                    <div class="ms-2" style="width:70%;">
+                                                        <select class="form-select" name="select_center_type" id="select_center_type">
+                                                            <option value="0">All</option>
+                                                            <option value="1">Owner</option>
+                                                            <option value="2">Partnership</option>
+                                                            <option value="3">Franchise</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-2" style="display:flex;align-items:center;">
+                                                    <div style="width:30%;">
+                                                        <lable>Managers name: </lable>
+                                                    </div>
+                                                    <div class="ms-2" style="width:70%;">
+                                                        <select class="form-select" id="select_manager_name">
+                                                            <option value="0">All</option>
+                                                            <?php
+                                                            $managerDetails = get_manager_details_case_center_type($DB);
+                                                            foreach ($managerDetails as $row) {
+                                                            ?>
+                                                                <option value="<?php echo ($row['manager_name']); ?>"><?php echo ($row['manager_name']); ?></option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-2" style="display:flex;align-items:center;">
+                                                    <div style="width:30%;">
+                                                        <lable>Select Center: </lable>
+                                                    </div>
+                                                    <div class=" ms-2" style="width:70%;">
+                                                        <select class="form-select" name="select_center" id="select_center">
+                                                            <option value="0">All</option>
+                                                            <?php $RowCenter = get_all_active_hospital_details($DB);
+                                                            foreach ($RowCenter as $row) { ?>
+                                                                <option value="<?php echo $row['hm_id']; ?>"><?php echo $row['hm_name']; ?></option>
+                                                            <?php }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="" style="display:flex;align-items:center;">
+                                                    <div style="width:30%;">
+                                                        <lable>Start Date: </lable>
+                                                    </div>
+                                                    <div class="ms-2" style="width:70%;">
+                                                        <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2" style="display:flex;align-items:center;">
+                                                    <div style="width:30%;">
+                                                        <lable>End Date: </lable>
+                                                    </div>
+                                                    <div class="ms-2" style="width:70%;">
+                                                        <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
+                                                    </div>
+                                                </div>
+                                                <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:space-between; ">
+                                                    <div style="width:50%;">
+                                                        <lable style="color:#003032; font-size:large;"><b>Total Patient:</b> </lable>
+                                                    </div>
+                                                    <div class="ms-2" style="width:50%;">
+                                                        <p class="text-end mt-2" style="color:#3980c0; font-size:medium;" id="total_patients_retrived">100000</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Select Center Type: </lable>
-                                                </div>
-                                                <div class="ms-2" style="width:70%;">
-                                                    <select class="form-select" name="select_center_type" id="select_center_type">
-                                                        <option value="0">All</option>
-                                                        <option value="1">Owner</option>
-                                                        <option value="2">Partnership</option>
-                                                        <option value="3">Franchise</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="mt-2" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Managers name: </lable>
-                                                </div>
-                                                <div class="ms-2" style="width:70%;">
-                                                    <select class="form-select" id="select_manager_name">
-                                                        <option value="0">All</option>
-                                                        <?php
-                                                        $managerDetails = get_manager_details_case_center_type($DB);
-                                                        foreach ($managerDetails as $row) {
-                                                        ?>
-                                                            <option value="<?php echo ($row['manager_name']); ?>"><?php echo ($row['manager_name']); ?></option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="mt-2" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Select Center: </lable>
-                                                </div>
-                                                <div class=" ms-2" style="width:70%;">
-                                                    <select class="form-select" name="select_center" id="select_center">
-                                                        <option value="0">All</option>
-                                                        <?php $RowCenter = get_all_active_hospital_details($DB);
-                                                        foreach ($RowCenter as $row) { ?>
-                                                            <option value="<?php echo $row['hm_id']; ?>"><?php echo $row['hm_name']; ?></option>
-                                                        <?php }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-between mt-3">
-                                                <div>
-                                                    <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
-                                                </div>
-
-                                                <div class="ms-2">
-                                                    <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
-                                                </div>
-                                                <div class="ms-2">
-                                                    <button class="btn btn-primary clear_date">Clear</button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <h3 class="text-end new-center-heading text-muted mb-0">Total Patient</h3>
-                                            <p class="text-end" id="total_patients_retrived">1000</p>
-                                        </div>
-
-
                                     </div>
                                     <!-- end row -->
-                                    <div class="table-responsive mb-4">
-                                        <table class="table table-centered table-nowrap mb-0" id="patient_master_table">
+                                    <div class="table-responsive mb-4 mt-4 pt-4" style="border-top: 1px solid #003032;">
+                                        <table class="table table-centered table-nowrap mb-0 border" style="border:3px solid #003032;" id="patient_master_table">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="width: 50px;">Sr. No.</th>
