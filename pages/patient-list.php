@@ -238,7 +238,7 @@ function get_manager_details_case_center_type($DB)
                 },
                 "columnDefs": [{ //Function to allow specific behaviour to specific columns
                         "orderable": false,
-                        "targets": [0, 1, 2, 4]
+                        "targets": [0, 1, 2, 3, 4]
                     },
                     {
                         "orderable": true,
