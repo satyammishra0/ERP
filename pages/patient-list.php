@@ -60,6 +60,8 @@ function get_manager_details_case_center_type($DB)
                     // include 'layouts/breadcrumb.php'; 
                     ?>
                     <!-- end page title -->
+
+                    <!-- Back and page naming -->
                     <div class="d-flex" style="display:flex;align-items:center;">
                         <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
                         <h3 class="new-center-heading text-muted ml-3 ms-3">All Patient List</h3>
@@ -72,6 +74,7 @@ function get_manager_details_case_center_type($DB)
                                 <div class="card-body">
                                     <div class="row mb-2  pt-2 pb-2 ">
                                         <div class="row">
+                                            <!-- Center type | center name | manager name filter -->
                                             <div class="col-md-8">
                                                 <div class="" style="display:flex;align-items:center;">
                                                     <div style="width:30%;">
@@ -123,6 +126,7 @@ function get_manager_details_case_center_type($DB)
                                                 </div>
                                             </div>
 
+                                            <!-- Date filter -->
                                             <div class="col-md-4">
                                                 <div class="" style="display:flex;align-items:center;">
                                                     <div style="width:30%;">
@@ -153,6 +157,7 @@ function get_manager_details_case_center_type($DB)
                                     </div>
                                     <!-- end row -->
                                     <div class="table-responsive mb-4 mt-4 pt-4" style="border-top: 1px solid #003032;">
+                                        <!-- Table fetching data of patients   -->
                                         <table class="table table-centered table-nowrap mb-0 border" style="border:3px solid #003032;" id="patient_master_table">
                                             <thead>
                                                 <tr>
