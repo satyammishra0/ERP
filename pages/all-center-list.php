@@ -46,30 +46,20 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
 
             <div class="page-content">
                 <div class="container-fluid">
-
-                    <!-- start page title -->
-                    <?php
-                    $maintitle = "Layouts";
-                    $title = 'Reports';
-                    ?>
-                    <?php
-                    // include 'layouts/breadcrumb.php'; 
-                    ?>
-                    <!-- end page title -->
-
-
+                    <!-- Back Button with page title -->
                     <div class="d-flex mb-2" style="display:flex;align-items:center;">
                         <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
                         <h3 class="new-center-heading text-muted ml-3 ms-3">All Center List</h3>
                     </div>
 
                     <div class="row">
-
                         <div class="col-lg-12">
                             <div class="card ">
                                 <div class="card-body">
                                     <div class="row mb-2">
                                         <div class="row">
+                                            <!-- Center type filters -->
+
                                             <div class="col-md-4" style="display:flex;flex-direction:column;">
                                                 <div style="width:100%;">
                                                     <lable>Select Center Type: </lable>
@@ -83,6 +73,9 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <!-- Zone wise filters -->
+
                                             <div class="col-md-4" style="display:flex;flex-direction:column;">
                                                 <div>
                                                     <lable>Select Zone: </lable>
@@ -102,7 +95,7 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                 </div>
                                             </div>
 
-
+                                            <!-- Manager name filter -->
                                             <div class="col-md-4" style="display:flex;flex-direction:column;">
                                                 <div style="width: 100%;">
                                                     <lable>Select Manager Name: </lable>
@@ -122,6 +115,7 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                 </div>
                                             </div>
 
+                                            <!-- Date Filters -->
                                             <div class="mt-3" style="display: flex; justify-content:center;align-items:center;">
                                                 <div style="display: flex; justify-content:center;align-items:center;">
                                                     <div style="width:40%;">
@@ -181,10 +175,6 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
     <?php include RIGHT_SIDEBAR; ?>
 
     <?php include SCRIPT; ?>
-
-
-
-
 
     <!-- apexcharts -->
     <script src="<?= get_assets() ?>libs/apexcharts/apexcharts.min.js"></script>
