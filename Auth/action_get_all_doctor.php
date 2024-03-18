@@ -30,7 +30,6 @@ if (isset($_POST['select_center_type']) && $_POST['select_center_type'] != 0) {
 
     if (!empty(total_hospitals)) {
         $from_new_query .= "AND (";
-
         for ($i = 0; $i < count(total_hospitals); $i++) {
 
             $from_new_query .= "FIND_IN_SET('" . total_hospitals[$i] . "', tum.hm_id) > 0";
@@ -40,13 +39,11 @@ if (isset($_POST['select_center_type']) && $_POST['select_center_type'] != 0) {
                 $from_new_query .= " OR ";
             }
         }
-
         $from_new_query .= ")";
     }
 }
 
 $sqlListType = "SELECT count(*) as cnt $from_new_query";
-// echo $sqlListType;
 $qryListType = $DB->prepare($sqlListType);
 $qryListType->execute();
 $ResultsList = $qryListType->fetch();
@@ -62,7 +59,6 @@ if (!empty($requestData['search']['value'])) {
     $sql .= " AND CONCAT (tum.first_name, ' ', tum.last_name) LIKE '%" . $requestData['search']['value'] . "%' ";
 }
 
-// print_r($_POST);
 
 if (!empty($_POST['select_center'])) {
     $center_id = $_POST['select_center'];
@@ -70,6 +66,7 @@ if (!empty($_POST['select_center'])) {
 }
 
 
+// Add condition to fetch data based on manager name
 if (!empty($_POST['manager_name'])) {
     $manager_name = $_POST['manager_name'];
     $sql .= " AND  thm.manager_name = '$manager_name'";
@@ -89,7 +86,6 @@ if (!empty(total_hospitals)) {
     $sql .= ")";
 }
 
-// echo $sql;
 
 $qry = $DB->prepare($sql);
 $qry->execute();
@@ -114,9 +110,9 @@ foreach ($ResultsList as $row) {
     $fname = $row['first_name'];
     $lname = $row['last_name'];
 
-    $FullName = $fname .  " " . $lname;
+    $FullName = "Dr. "  . $fname .  " " . $lname;
 
-    $CaseLink = $FullName;
+    $CaseLink = $FullName; //Full name
 
     $center_id = $row['hm_id'];
 
@@ -143,7 +139,7 @@ foreach ($ResultsList as $row) {
             $cnt_name = $center_name['hm_name'] . "<br>";
         }
     }
-    // echo $cnt_name;
+
     $nestedData[] = $CounterNumber;
     $nestedData[] = $CaseLink;
     $nestedData[] = $cnt_name;

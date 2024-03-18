@@ -19,7 +19,9 @@ if (isset($_REQUEST['list'])) {
 // If zone name is set then it fetches names based on zonenames
 if (isset($_REQUEST['zoneName'])) {
     $zoneName = $_REQUEST['zoneName'];
-    $fetchManagerQuery .= " AND `hm_zone` = '$zoneName'";
+    if ($zoneName != 0) {
+        $fetchManagerQuery .= " AND `hm_zone` = '$zoneName'";
+    }
 }
 
 $prepCenterType = $DB->prepare($fetchManagerQuery);
@@ -27,7 +29,7 @@ $prepCenterType->execute();
 
 $managerList = $prepCenterType->fetchAll();
 
-$data[] = '<option value="0">All</option>';
+$data[] = '<option value="0">Select Name</option>';
 
 foreach ($managerList as $row) {
     $data[] = '<option value="' . $row['distinct_manager_name'] . '">' . $row['distinct_manager_name'] . '</option>';
