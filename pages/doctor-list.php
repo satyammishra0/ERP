@@ -33,17 +33,13 @@ include_once HEAD_TOP;
 
             <div class="page-content">
                 <div class="container-fluid">
+                    <!-- <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex"><i class="bx bx-left-arrow-alt fs-4"></i> Back</button> -->
 
-                    <!-- start page title -->
-                    <?php
-                    $maintitle = "Layouts";
-                    $title = 'Reports';
-                    ?>
-                    <?php
-                    // include_once 'layouts/breadcrumb.php'; 
-                    ?>
-                    <!-- end page title -->
-                    <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex"><i class="bx bx-left-arrow-alt fs-4"></i> Back</button>
+                    <!-- Back and page naming -->
+                    <div class="d-flex mb-2" style="display:flex;align-items:center;">
+                        <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
+                        <h3 class="new-center-heading text-muted ml-3 ms-3">All Doctor List</h3>
+                    </div>
 
 
                     <div class="row">
@@ -51,56 +47,62 @@ include_once HEAD_TOP;
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row mb-2">
-                                        <div class="col-md-3">
-                                            <div class="mb-3">
-                                                <!--<a href="javascript:void(0);" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-plus me-2"></i> Add New</a>-->
-                                                <h3 class="new-center-heading text-muted mb-0">All Doctor List</h3>
+
+                                        <!-- Center type filter -->
+                                        <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                            <div style="width:100%;">
+                                                <lable>Select Center Type: </lable>
+                                            </div>
+                                            <div class="" style="width:100%;">
+                                                <select class="form-select" name="select_center_type" id="select_center_type">
+                                                    <option value="0">All</option>
+                                                    <option value="1">Owner</option>
+                                                    <option value="2">Partnership</option>
+                                                    <option value="3">Franchise</option>
+                                                </select>
                                             </div>
                                         </div>
 
-
-                                        <div class="col-md-5">
-                                            <div class="" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Select Center Type: </lable>
-                                                </div>
-                                                <div class=" ms-2" style="width:70%;">
-                                                    <select class="form-select" name="select_center_type" id="select_center_type">
-                                                        <option value="0">All</option>
-                                                        <option value="1">Owner</option>
-                                                        <option value="2">Partnership</option>
-                                                        <option value="3">Franchise</option>
-                                                    </select>
-                                                </div>
+                                        <!-- Manager name filter -->
+                                        <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                            <div style="width: 100%;">
+                                                <lable>Select Manager Name: </lable>
                                             </div>
-                                            <div class="mt-2" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Select Center: </lable>
-                                                </div>
-                                                <div class=" ms-2" style="width:70%;">
-                                                    <select class="form-select" name="select_center" id="select_center">
-                                                        <option value="0">All</option>
-                                                        <?php $RowCenter = get_all_active_hospital_details($DB);
-                                                        foreach ($RowCenter as $row) { ?>
-                                                            <option value="<?php echo $row['hm_id']; ?>"><?php echo $row['hm_name']; ?></option>
-                                                        <?php }
-                                                        ?>
-                                                    </select>
-                                                </div>
+                                            <div style="width: 100%;">
+                                                <select class="form-select" id="select_manager_name">
+                                                    <option value="0">All</option>
+                                                    <?php
+                                                    $managerDetails = get_manager_details_case_center_type($DB);
+                                                    foreach ($managerDetails as $row) {
+                                                    ?>
+                                                        <option value="<?php echo ($row['manager_name']); ?>"><?php echo ($row['manager_name']); ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
-
-
                                         </div>
 
-                                        <div class="col-md-4">
-
+                                        <!-- Center Name filters -->
+                                        <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                            <div>
+                                                <lable>Select Center: </lable>
+                                            </div>
+                                            <div class="" style="width:100%;">
+                                                <select class="form-select" name="select_center" id="select_center">
+                                                    <option value="0">All</option>
+                                                    <?php $RowCenter = get_all_active_hospital_details($DB);
+                                                    foreach ($RowCenter as $row) { ?>
+                                                        <option value="<?php echo $row['hm_id']; ?>"><?php echo $row['hm_name']; ?></option>
+                                                    <?php }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
-
-
                                     </div>
                                     <!-- end row -->
-                                    <div class="table-responsive mb-4">
-                                        <table class="table table-centered table-nowrap mb-0" id="center_master_table">
+                                    <div class="table-responsive mb-4 mt-4">
+                                        <table class="table table-centered table-nowrap mb-0 mt-2" id="center_master_table">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="width: 50px;">Sr. No.
@@ -158,6 +160,7 @@ include_once HEAD_TOP;
         function mytable() {
             var select_center_type = $('#select_center_type').val();
             var select_center = $('#select_center').val();
+            var manager_name = $("#select_manager_name").val();
 
 
             var dataTable = $('#center_master_table').DataTable({
@@ -172,12 +175,6 @@ include_once HEAD_TOP;
                     $("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
                     return nRow;
                 },
-                // "scrollY": "calc(100vh - 290px)",
-                // 			"rowCallback": function(nRow, aData, iDisplayIndex) {
-                // 				var oSettings = this.fnSettings();
-                // 				$("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
-                // 				return nRow;
-                // 			},
                 "columnDefs": [{
                         "orderable": false,
                         "targets": [0, 1, 2, 3]
@@ -192,10 +189,7 @@ include_once HEAD_TOP;
                     [10, 50, 200, 1000, "All"]
                 ],
                 "language": {
-
                     "emptyTable": "No Patient(s) added",
-
-
                 },
 
                 "ajax": {
@@ -205,9 +199,7 @@ include_once HEAD_TOP;
                     data: {
                         select_center_type: select_center_type,
                         select_center: select_center,
-
-                        // center_date_from: center_date_from,
-                        // center_date_end: center_date_end,
+                        manager_name: manager_name,
                     },
                     error: function() { // error handling
                         $(".patient_master_table-error").html("");
@@ -221,19 +213,54 @@ include_once HEAD_TOP;
             $('#search').keyup(function() {
                 dataTable.search($(this).val()).draw();
             });
-
-
         };
 
         mytable();
 
+        // Function to populate table values depending on center|| Franchise || Owner
         $('#select_center_type').on('change', function() {
+            var type = $(this).val();
+            var ajax1 = $.ajax({
+                url: "Auth/action_get_center_list.php?list=" + type,
+                method: "GET",
+                dataType: "JSON",
+            }).done(function(result) {
+                $('#select_center').html(result);
+            });
+
+            var ajax2 = $.ajax({
+                url: "Auth/action_get_all_manager_details.php?list=" + type,
+                method: "GET",
+                dataType: "JSON",
+            }).done(function(result) {
+                $('#select_manager_name').html(result);
+            });
+
+            $.when(ajax1, ajax2).done(function() {
+                mytable(); // Calling function when both AJAX calls are completed
+            });
+        });
+
+        // Function to update table data || center names based on their manager names
+        $('#select_manager_name').on('change', function() {
             mytable();
+
+            var manager_name = $(this).val();
+
+            var ajax2 = $.ajax({
+                url: "Auth/action_get_center_list.php?manager_name=" + manager_name,
+                method: "GET",
+                dataType: "JSON",
+            }).done(function(result) {
+                $('#select_center').html(result);
+            });
+
+            $.when(ajax2).done(function() {
+                mytable(); // Calling function when both AJAX calls are completed
+            });
         })
 
-        // $('#select_center_zone').on('change', function() {
-        //     mytable();  
-        // })
+
 
         $('#select_center').on('change', function() {
             mytable();

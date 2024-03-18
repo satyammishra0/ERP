@@ -23,8 +23,6 @@ if (isset($_POST['select_center_type']) && $_POST['select_center_type'] != 0) {
 
     $from_new_query = "FROM `tbl_user_master` tum JOIN `tbl_hospital_master` thm ON thm.hm_id = tum.hm_id 
     WHERE tum.ut_id IN ('1','2') AND tum.um_del = '0' AND thm.ht_id IN (" . $select_center_type . ")";
-
-    
 } else {
 
     $from_new_query = "FROM `tbl_user_master` tum JOIN `tbl_hospital_master` thm ON thm.hm_id = tum.hm_id
@@ -69,6 +67,12 @@ if (!empty($requestData['search']['value'])) {
 if (!empty($_POST['select_center'])) {
     $center_id = $_POST['select_center'];
     $sql .= " AND  tum.hm_id IN ('$center_id')";
+}
+
+
+if (!empty($_POST['manager_name'])) {
+    $manager_name = $_POST['manager_name'];
+    $sql .= " AND  thm.manager_name = '$manager_name'";
 }
 
 

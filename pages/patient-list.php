@@ -91,7 +91,7 @@ if (!in_array('3', explode(',', $_SESSION['ERP_ACCESS']))) {
                     <!-- end page title -->
 
                     <!-- Back and page naming -->
-                    <div class="d-flex" style="display:flex;align-items:center;">
+                    <div class="d-flex mb-2" style="display:flex;align-items:center;">
                         <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
                         <h3 class="new-center-heading text-muted ml-3 ms-3">All Patient List</h3>
                     </div>
