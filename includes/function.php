@@ -5637,3 +5637,15 @@ function get_user_master_pasword_status_from_id(PDO $DB, $UserId)
 function check_auth_access()
 {
 }
+
+
+// Function to fetch all manager names 
+
+function get_manager_details_case_center_type($DB)
+{
+    $fetchManagerQuery = "SELECT DISTINCT(`manager_name`) FROM " . DB_PREFIX  . "hospital_master WHERE `hm_del` = '0'";
+    $prepFetchManagerQuery = $DB->prepare($fetchManagerQuery);
+    $prepFetchManagerQuery->execute();
+    $resultFetchManagerQuery = $prepFetchManagerQuery->fetchAll();
+    return $resultFetchManagerQuery;
+}

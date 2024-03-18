@@ -7,14 +7,14 @@ if (!in_array('3', explode(',', $_SESSION['ERP_ACCESS']))) {
 
 // Function to populate all manager names in dropdown
 
-function get_manager_details_case_center_type($DB)
-{
-    $fetchManagerQuery = "SELECT `manager_name` FROM " . DB_PREFIX  . "hospital_master WHERE `hm_del` = '0'";
-    $prepFetchManagerQuery = $DB->prepare($fetchManagerQuery);
-    $prepFetchManagerQuery->execute();
-    $resultFetchManagerQuery = $prepFetchManagerQuery->fetchAll();
-    return $resultFetchManagerQuery;
-}
+// function get_manager_details_case_center_type($DB)
+// {
+//     $fetchManagerQuery = "SELECT `manager_name` FROM " . DB_PREFIX  . "hospital_master WHERE `hm_del` = '0'";
+//     $prepFetchManagerQuery = $DB->prepare($fetchManagerQuery);
+//     $prepFetchManagerQuery->execute();
+//     $resultFetchManagerQuery = $prepFetchManagerQuery->fetchAll();
+//     return $resultFetchManagerQuery;
+// }
 ?>
 
 <?php include_once HEAD_TOP; ?>
@@ -32,6 +32,35 @@ function get_manager_details_case_center_type($DB)
         table.dataTable thead td {
             padding: 10px 8px;
         }
+
+        /* #total_patients_retrived {
+            height: 60px;
+            width: 30px;
+            width: max-content;
+            border-radius: 50%;
+        }
+
+
+        @keyframes glow {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 10px #003032;
+            }
+
+            50% {
+                transform: scale(1.5);
+                box-shadow: 0 0 20px #003032;
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px #003032;
+            }
+        }
+
+        .glow {
+            animation: glow 1s ease-in-out;
+        } */
     </style>
 
 </head>
@@ -145,10 +174,10 @@ function get_manager_details_case_center_type($DB)
                                                     </div>
                                                 </div>
                                                 <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:space-between; ">
-                                                    <div style="width:50%;">
+                                                    <div>
                                                         <lable style="color:#003032; font-size:large;"><b>Total Patient:</b> </lable>
                                                     </div>
-                                                    <div class="ms-2" style="width:50%;">
+                                                    <div class="ms-2">
                                                         <p class="text-end mt-2" style="color:#3980c0; font-size:medium;" id="total_patients_retrived">100000</p>
                                                     </div>
                                                 </div>
@@ -290,6 +319,13 @@ function get_manager_details_case_center_type($DB)
                 "initComplete": function(settings, json) {
                     // Update the text of the p tag with id "total_patients_retrived" with the value of "recordsFiltered"
                     $("#total_patients_retrived").text(json.recordsFiltered);
+
+                    // Adding class to have a glow effect 
+                    $("#total_patients_retrived").addClass('glow');
+
+                    setTimeout(function() {
+                        $("#total_patients_retrived").removeClass('glow');
+                    }, 1000);
                 },
                 bDestroy: true, //set attribute to destroy existing table whenever condition changes
             });

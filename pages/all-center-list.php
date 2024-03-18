@@ -70,11 +70,11 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                 <div class="card-body">
                                     <div class="row mb-2">
                                         <div class="row">
-                                            <div class="col-md-6" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
+                                            <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                                <div style="width:100%;">
                                                     <lable>Select Center Type: </lable>
                                                 </div>
-                                                <div class=" ms-2" style="width:70%;">
+                                                <div class="" style="width:100%;">
                                                     <select class="form-select" name="select_center_type" id="select_center_type">
                                                         <option value="0">All</option>
                                                         <option value="1">Owner</option>
@@ -83,11 +83,11 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
+                                            <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                                <div>
                                                     <lable>Select Zone: </lable>
                                                 </div>
-                                                <div class=" ms-2" style="width:70%;">
+                                                <div class="" style="width:100%;">
                                                     <select class="form-select" name="select_center_zone" id="select_center_zone">
                                                         <option value="0">All</option>
                                                         <option value="A">A</option>
@@ -102,18 +102,35 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                 </div>
                                             </div>
 
+
+                                            <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                                <div style="width: 100%;">
+                                                    <lable>Select Manager Name: </lable>
+                                                </div>
+                                                <div style="width: 100%;">
+                                                    <select class="form-select" id="select_manager_name">
+                                                        <option value="0">All</option>
+                                                        <?php
+                                                        $managerDetails = get_manager_details_case_center_type($DB);
+                                                        foreach ($managerDetails as $row) {
+                                                        ?>
+                                                            <option value="<?php echo ($row['manager_name']); ?>"><?php echo ($row['manager_name']); ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div class="mt-3" style="display: flex; justify-content:center;align-items:center;">
                                                 <div style="display: flex; justify-content:center;align-items:center;">
                                                     <div style="width:40%;">
-                                                        <lable>Select Center Type: </lable>
-
+                                                        <lable>Select Date: </lable>
                                                     </div>
                                                     <div class="ms-2" style="width:60%;">
                                                         <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
-
                                                     </div>
                                                 </div>
-
                                                 <div class="ms-2">
                                                     <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
                                                 </div>
@@ -133,7 +150,6 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                     </th>
                                                     <th scope="col">Center Name</th>
                                                     <th scope="col">Manager</th>
-
                                                     <th scope="col">Leads</th>
                                                     <th scope="col">Patients</th>
                                                     <th scope="col">ECP</th>
@@ -189,6 +205,7 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
             // var select_center = $('#select_center').val();
             var center_date_from = $('#center_date_from').val();
             var center_date_end = $('#center_date_end').val();
+            var manager_name = $("#select_manager_name").val();
             var dataTable = $('#center_master_table').DataTable({
                 "searching": true,
                 "processing": true,
@@ -208,12 +225,6 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                     $("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
                     return nRow;
                 },
-                // "scrollY": "calc(100vh - 290px)",
-                // 			"rowCallback": function(nRow, aData, iDisplayIndex) {
-                // 				var oSettings = this.fnSettings();
-                // 				$("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
-                // 				return nRow;
-                // 			},
                 "columnDefs": [{
                         "orderable": false,
                         "targets": [0, 1, 2, 3]
@@ -232,15 +243,14 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                 },
 
                 "ajax": {
-
                     url: "./Auth/action_get_center_master.php", // json datasource
                     type: "post", // method  , by default get
                     data: {
                         select_center_type: select_center_type,
                         select_center_zone: select_center_zone,
-                        // select_center: select_center,
                         center_date_from: center_date_from,
                         center_date_end: center_date_end,
+                        manager_name: manager_name,
                     },
                     error: function() { // error handling
                         $(".patient_master_table-error").html("");
@@ -254,23 +264,49 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
             $('#search').keyup(function() {
                 dataTable.search($(this).val()).draw();
             });
-
-
         };
 
         mytable();
 
+
+        // Function to populate table values depending on center|| Franchise || Owner
         $('#select_center_type').on('change', function() {
-            mytable();
-        })
+            var type = $(this).val();
+            var ajax2 = $.ajax({
+                url: "Auth/action_get_all_manager_details.php?list=" + type,
+                method: "GET",
+                dataType: "JSON",
+            }).done(function(result) {
+                $('#select_manager_name').html(result);
+            });
 
+            $.when(ajax2).done(function() {
+                mytable(); // Calling function when AJAX calls are completed
+            });
+        });
+
+
+        // Populate manager name based on the zone type
         $('#select_center_zone').on('change', function() {
-            mytable();
-        })
+            var zone = $(this).val();
+            var ajax1 = $.ajax({
+                url: "Auth/action_get_all_manager_details.php?zoneName=" + zone,
+                method: "GET",
+                dataType: 'JSON',
+            }).done(function(result) {
+                $("#select_manager_name").html(result);
+            })
+            $.when(ajax1).done(function() {
+                mytable();
+            })
+        });
 
-        // $('#select_center').on('change', function() {
-        //     mytable();
-        // })
+
+        // Populating data acc to Onchange of the manager name
+        $("#select_manager_name").on('change', function() {
+            mytable();
+        });
+
 
         $('#center_date_from').on('change', function() {
             if ($('#center_date_end').val() != "") {
@@ -288,8 +324,6 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
             $('#center_date_from').val("");
             $('#center_date_end').val("");
             mytable();
-
-
         })
     </script>
 

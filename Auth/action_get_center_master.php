@@ -2,7 +2,8 @@
 
 include_once '../init.php';
 
-
+error_reporting(1);
+ini_set('display_errors', true);
 
 function get_ecp_count_from_hospital_id(PDO $DB, $HospitalId, $start_date = null, $end_date = null)
 {
@@ -68,9 +69,6 @@ function get_last_eecp_entry_from_hospital(PDO $DB, $HospitalId)
     return $qryList->fetch();
 }
 
-error_reporting(1);
-ini_set('display_errors', true);
-
 
 $requestData = $_REQUEST;
 
@@ -112,12 +110,17 @@ if (!empty($_POST['center_date_from']) && !empty($_POST['center_date_from'])) {
 
 if (isset($_POST['select_center_zone']) && !empty($_POST['select_center_zone'])) {
     $center_zone = $_POST['select_center_zone'];
-
-
     $sql .= " AND hm_zone = '$center_zone'";
 }
 
+// If manager name is selected
+if (isset($_POST['manager_name']) && !empty($_POST['manager_name'])) {
+    $manager_name = $_POST['manager_name'];
+    $sql .= " AND `manager_name` = '$manager_name'";
+}
+
 $sql .= !empty(total_hospitals) ? " AND hm_id IN(" . implode(',', total_hospitals) . " )" : "";
+
 
 $qry = $DB->prepare($sql);
 $qry->execute();
@@ -133,14 +136,9 @@ $data = array();
 $CounterNumber = 0;
 $recordCount = 0;
 $i = 1;
+
 foreach ($ResultsList as $row) {
     $CounterNumber++;
-
-    // if($i%2==0){
-    //     $last_login = '<button class="btn btn-sm btn-success m-0">Login</button>';
-    // }else{
-    //     $last_login = '<button class="btn btn-sm btn-danger m-0">Logout</button>';
-    // }
 
     $i++;
     $center_name = $row['hm_name'];
@@ -172,11 +170,6 @@ foreach ($ResultsList as $row) {
         $total_lead_f = get_all_count_total_leads($DB, $row['hm_id']);
         $total_lead = '<b>' . $total_lead_f . '</b> ';
     }
-
-
-
-
-
 
 
     if (date('d-m-y', strtotime($last_lead_row['lm_created_date'])) == '01-01-70') {
@@ -285,12 +278,3 @@ $json_data = array(
 );
 
 echo json_encode($json_data);  // send data as json format
-
-
-
-
-// SELECT PP.hm_id, hm.hm_name, SUM(CASE WHEN PP.package_type = 2 THEN 1 ELSE 0 END) AS count_package_type_2 , SUM(CASE WHEN PP.package_type = 1 THEN 1 ELSE 0 END) AS count_package_type_1 FROM `tbl_patient_package_master` PP RIGHT JOIN `tbl_hospital_master` hm ON pp.hm_id = hm.hm_id WHERE PP.tppm_del = '0' AND (PP.tppm_status = '1' OR PP.tppm_status = '0') GROUP BY PP.hm_id;
-
-
-
-// SELECT thm.hm_id, thm.hm_name , count(tam.hm_id) AS count FROM `tbl_hospital_master` thm  LEFT JOIN `tbl_appointment_master` tam ON thm.hm_id = tam.hm_id WHERE tam.pam_status = '3' AND tam.pam_del = '0' GROUP BY tam.hm_id ;
