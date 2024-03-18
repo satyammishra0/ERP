@@ -57,7 +57,11 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                     ?>
                     <!-- end page title -->
 
-                    <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex"><i class="bx bx-left-arrow-alt fs-4"></i> Back</button>
+
+                    <div class="d-flex mb-2" style="display:flex;align-items:center;">
+                        <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
+                        <h3 class="new-center-heading text-muted ml-3 ms-3">All Center List</h3>
+                    </div>
 
                     <div class="row">
 
@@ -65,14 +69,8 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                             <div class="card ">
                                 <div class="card-body">
                                     <div class="row mb-2">
-                                        <div class="col-md-3">
-                                            <div class="mb-3">
-
-                                                <h3 class="new-center-heading text-muted mb-0 mt-2">All Center List</h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="" style="display:flex;align-items:center;">
+                                        <div class="row">
+                                            <div class="col-md-6" style="display:flex;align-items:center;">
                                                 <div style="width:30%;">
                                                     <lable>Select Center Type: </lable>
                                                 </div>
@@ -85,7 +83,7 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="mt-2" style="display:flex;align-items:center;">
+                                            <div class="col-md-6" style="display:flex;align-items:center;">
                                                 <div style="width:30%;">
                                                     <lable>Select Zone: </lable>
                                                 </div>
@@ -100,14 +98,20 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                         <option value="F">F</option>
                                                         <option value="G">G</option>
                                                         <option value="H">H</option>
-
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="d-flex justify-content-between mt-3">
-                                                <div>
-                                                    <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
+                                            <div class="mt-3" style="display: flex; justify-content:center;align-items:center;">
+                                                <div style="display: flex; justify-content:center;align-items:center;">
+                                                    <div style="width:40%;">
+                                                        <lable>Select Center Type: </lable>
+
+                                                    </div>
+                                                    <div class="ms-2" style="width:60%;">
+                                                        <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
+
+                                                    </div>
                                                 </div>
 
                                                 <div class="ms-2">
@@ -116,18 +120,8 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                 <div class="ms-2">
                                                     <button class="btn btn-primary clear_date">Clear</button>
                                                 </div>
-
                                             </div>
-
-
-
                                         </div>
-
-                                        <div class="col-md-4">
-
-                                        </div>
-
-
                                     </div>
                                     <!-- end row -->
                                     <div class="table-responsive mb-4">
@@ -144,13 +138,9 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                                     <th scope="col">Patients</th>
                                                     <th scope="col">ECP</th>
                                                     <th scope="col">SDT</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-
-
                                             </tbody>
                                         </table>
                                     </div>
