@@ -2,9 +2,6 @@
 
 include_once '../init.php';
 
-
-
-
 error_reporting(1);
 ini_set('display_errors', true);
 
@@ -48,6 +45,13 @@ if (isset($_POST['select_center_zone']) && !empty($_POST['select_center_zone']))
     $center_zone = $_POST['select_center_zone'];
     $from_new_query .= " AND hm.hm_zone = '$center_zone'";
 }
+
+// Adding conditions based on manager name
+if (isset($_POST['manager_name']) && !empty($_POST['manager_name'])) {
+    $manager_name = $_POST['manager_name'];
+    $from_new_query .= " AND hm.manager_name = '$manager_name'";
+}
+
 
 if (!empty($requestData['search']['value'])) {
     $from_new_query .= " AND (hm.hm_name LIKE '%" . $requestData['search']['value'] . "%');";

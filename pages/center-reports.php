@@ -202,6 +202,8 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
             // var select_center = $('#select_center').val();
             var center_date_from = $('#center_date_from').val();
             var center_date_end = $('#center_date_end').val();
+            var manager_name = $("#select_manager_name").val();
+
             var dataTable = $('#center_master_table').DataTable({
                 "searching": true,
                 "processing": true,
@@ -240,6 +242,7 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
                         // select_center: select_center,
                         center_date_from: center_date_from,
                         center_date_end: center_date_end,
+                        manager_name: manager_name,
                     },
                     error: function() { // error handling
                         $(".patient_master_table-error").html("");
