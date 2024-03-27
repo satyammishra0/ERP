@@ -37,6 +37,7 @@ if (isset($_POST['select_center_type']) && $_POST['select_center_type'] != 0) {
     $select_center_type = $_POST['select_center_type'];
     $from_new_query .= " AND thm.ht_id = '$select_center_type'";
 }
+
 if (isset($_POST['select_center']) && !empty($_POST['select_center'])) {
     $center_id = $_POST['select_center'];
     $from_new_query .= " AND thm.hm_id = '$center_id'";
@@ -51,6 +52,12 @@ if (!empty($_POST['center_date_from']) && !empty($_POST['center_date_from'])) {
     $from_new_query .= " AND date(tppm.tppm_date) BETWEEN '$from' AND ' $end'";
 }
 
+
+// Adding conditions based on manager name
+if (isset($_POST['manager_name']) && !empty($_POST['manager_name'])) {
+    $manager_name = $_POST['manager_name'];
+    $from_new_query .= " AND thm.manager_name = '$manager_name'";
+}
 
 $sqlListType = "SELECT count(*) as cnt $from_new_query";
 $qryListType = $DB->prepare($sqlListType);
