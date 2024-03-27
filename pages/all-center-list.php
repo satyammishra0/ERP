@@ -116,20 +116,30 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                                             </div>
 
                                             <!-- Date Filters -->
-                                            <div class="mt-3" style="display: flex; justify-content:center;align-items:center;">
-                                                <div style="display: flex; justify-content:center;align-items:center;">
-                                                    <div style="width:40%;">
+                                            <div class="row mt-4">
+                                                <div class="col-md-8 d-flex justify-content-between">
+                                                    <div style="width:100%;">
                                                         <lable>Select Date: </lable>
                                                     </div>
-                                                    <div class="ms-2" style="width:60%;">
+                                                    <div class="ms-2" style="width:100%;">
                                                         <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
                                                     </div>
+                                                    <div class="ms-2" style="width:100%;">
+                                                        <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
+                                                    </div>
+                                                    <div class="ms-2" style="width:100%;">
+                                                        <button class="btn btn-primary clear_date">Clear</button>
+                                                    </div>
                                                 </div>
-                                                <div class="ms-2">
-                                                    <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
-                                                </div>
-                                                <div class="ms-2">
-                                                    <button class="btn btn-primary clear_date">Clear</button>
+                                                <div class="col-md-4">
+                                                    <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:space-between; ">
+                                                        <div>
+                                                            <lable style="color:#003032; font-size:large;"><b>Total Doctor</b> </lable>
+                                                        </div>
+                                                        <div class="ms-2">
+                                                            <p class="text-end mt-2" style="color:#3980c0; font-size:medium;" id="total_patients_retrived">100000</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -248,6 +258,11 @@ if (!in_array('2', explode(',', $_SESSION['ERP_ACCESS']))) {
                         $("#center_master_table_processing").css("display", "none");
                     }
                 },
+
+                "initComplete": function(settings, json) {
+                    $("#total_patients_retrived").text(json.recordsFiltered);
+                },
+
                 bDestroy: true,
             });
 

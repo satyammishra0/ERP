@@ -99,6 +99,18 @@ include_once HEAD_TOP;
                                                 </select>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-8"></div>
+                                        <div class="col-md-4">
+                                            <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:space-between; ">
+                                                <div>
+                                                    <lable style="color:#003032; font-size:large;"><b>Total Doctor</b> </lable>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <p class="text-end mt-2" style="color:#3980c0; font-size:medium;" id="total_patients_retrived">100000</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- end row -->
                                     <div class="table-responsive mb-4 mt-4">
@@ -207,6 +219,11 @@ include_once HEAD_TOP;
                         $("#center_master_table_processing").css("display", "none");
                     }
                 },
+
+                "initComplete": function(settings, json) {
+                    $("#total_patients_retrived").text(json.recordsFiltered);
+                },
+
                 bDestroy: true,
             });
 
