@@ -206,37 +206,6 @@ function get_all_sdt_count(PDO $DB)
                     <!-- end page title -->
 
                     <div class="row">
-                        <!-- <div class="col-xl-4">
-                            <div class="card bg-primary">
-                                <div class="card-body">
-                                    <div class="text-center py-3">
-                                        <ul class="bg-bubbles ps-0">
-                                            <li><i class="bx bx-grid-alt font-size-24"></i></li>
-                                            <li><i class="bx bx-tachometer font-size-24"></i></li>
-                                            <li><i class="bx bx-store font-size-24"></i></li>
-                                            <li><i class="bx bx-cube font-size-24"></i></li>
-                                            <li><i class="bx bx-cylinder font-size-24"></i></li>
-                                            <li><i class="bx bx-command font-size-24"></i></li>
-                                            <li><i class="bx bx-hourglass font-size-24"></i></li>
-                                            <li><i class="bx bx-pie-chart-alt font-size-24"></i></li>
-                                            <li><i class="bx bx-coffee font-size-24"></i></li>
-                                            <li><i class="bx bx-polygon font-size-24"></i></li>
-                                        </ul>
-                                        <div class="main-wid position-relative">
-                                            <h3 class="text-white">Symox Dashboard</h3>
-
-                                            <h3 class="text-white mb-0"> Welcome Back, Peter Kelsey!</h3>
-
-                                            <p class="text-white-50 px-4 mt-4">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien libero tincidunt.</p>
-
-                                            <div class="mt-4 pt-2 mb-2">
-                                                <a href="" class="btn btn-success">View Profile <i class="mdi mdi-arrow-right ms-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-xl-12">
                             <div class="row">
 
@@ -254,10 +223,7 @@ function get_all_sdt_count(PDO $DB)
                                                 <?php
                                                 $count_all_active_centers = get_all_center_count($DB);
                                                 ?>
-                                                <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_active_centers; ?>
-
-
-                                                </h4>
+                                                <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_active_centers; ?></h4>
                                             </div>
                                         </div>
                                     </div>
@@ -318,7 +284,6 @@ function get_all_sdt_count(PDO $DB)
                                             $count_all_doctor = get_all_doctor_count($DB);
                                             ?>
                                             <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_doctor;  ?>
-                                                <!-- <sup class="text-success fw-medium font-size-14"><i class="mdi mdi-arrow-down"></i> 10%</sup> -->
                                             </h4>
                                         </div>
                                     </div>
@@ -330,16 +295,14 @@ function get_all_sdt_count(PDO $DB)
                                         <div class="card-body">
                                             <div class="avatar">
                                                 <span class="avatar-title bg-soft-primary rounded">
-                                                    <!--<i class="mdi mdi-shopping-outline text-primary font-size-24"></i>-->
                                                     <i class="bx bx-bed text-primary font-size-24"></i>
                                                 </span>
                                             </div>
-                                            <p class="new-center-heading text-muted mt-4 mb-0"><a href="<?= home_path() ?>/doctor-list">EECP Treatment</a></p>
+                                            <p class="new-center-heading text-muted mt-4 mb-0"><a href="<?= home_path() ?>/report-details/ecp">EECP Treatment</a></p>
                                             <?php
-                                            $count_all_doctor = get_all_eecp_count($DB);
+                                            $count_all_eecp = get_all_eecp_count($DB);
                                             ?>
-                                            <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_doctor;  ?>
-                                                <!-- <sup class="text-success fw-medium font-size-14"><i class="mdi mdi-arrow-down"></i> 10%</sup> -->
+                                            <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_eecp;  ?>
                                             </h4>
                                         </div>
                                     </div>
@@ -354,12 +317,11 @@ function get_all_sdt_count(PDO $DB)
                                                     <i class="bx bx-pulse icon text-primary font-size-24"></i>
                                                 </span>
                                             </div>
-                                            <p class="new-center-heading text-muted mt-4 mb-0"><a href="<?= home_path() ?>/doctor-list">Detox treatment</a></p>
+                                            <p class="new-center-heading text-muted mt-4 mb-0"><a href="<?= home_path() ?>/report-details/sdt">Detox treatment</a></p>
                                             <?php
-                                            $count_all_doctor = get_all_sdt_count($DB);
+                                            $count_all_sdt = get_all_sdt_count($DB);
                                             ?>
-                                            <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_doctor;  ?>
-                                                <!-- <sup class="text-success fw-medium font-size-14"><i class="mdi mdi-arrow-down"></i> 10%</sup> -->
+                                            <h4 class="mt-1 mb-0 new-number-heading"><?php echo $count_all_sdt;  ?>
                                             </h4>
                                         </div>
                                     </div>
