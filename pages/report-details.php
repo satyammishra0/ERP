@@ -140,30 +140,25 @@ if ($hid != '') {
                                             </div>
                                         </div>
 
-                                    </div>
-
-                                    <div class="row">
-                                        <div style="width: 70%;">
-                                            <!-- Date Filters -->
-                                            <div class="mt-3" style="display: flex; justify-content:center;align-items:center;">
-                                                <div style="display: flex; justify-content:center;align-items:center;">
-                                                    <div style="width:40%;">
-                                                        <lable>Select Date: </lable>
-                                                    </div>
-                                                    <div class="ms-2" style="width:60%;">
-                                                        <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
-                                                    </div>
+                                        <div class="col-md-8 mt-4">
+                                            <div class="d-flex justify-content-between mt-3">
+                                                <div style="width: 100%;">
+                                                    <lable>Select Date: </lable>
                                                 </div>
-                                                <div class="ms-2">
+                                                <div class="ms-2" style="width: 100%;">
+                                                    <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
+                                                </div>
+
+                                                <div class="ms-2" style="width: 100%;">
                                                     <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
                                                 </div>
-                                                <div class="ms-2">
+                                                <div class="ms-2" style="width: 100%;">
                                                     <button class="btn btn-primary clear_date">Clear</button>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div style="width: 30%;">
+                                        <div class="col-md-4 mt-4">
                                             <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:space-between; ">
                                                 <div>
                                                     <lable style="color:#003032; font-size:large;"><b> <?= $report_type == 'ecp' ? "Total EECP Reports" : "Total SDT Reports" ?></b> </lable>

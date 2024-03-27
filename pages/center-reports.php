@@ -10,16 +10,11 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
 <?php include_once HEAD_TOP; ?>
 
 <head>
-
     <title><?php echo "Dashboard" ?> | SAAOL - Admin & Dashboard Template</title>
 
     <?php include HEAD; ?>
 
-
-
     <?php include SCRIPT; ?>
-
-
 
 </head>
 
@@ -48,77 +43,100 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
                     // include 'layouts/breadcrumb.php'; 
                     ?>
                     <!-- end page title -->
-                    <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex"><i class="bx bx-left-arrow-alt fs-4"></i> Back</button>
+
+                    <div class="d-flex mb-2" style="display:flex;align-items:center;">
+                        <button onclick="history.back()" class="btn btn-sm btn-dark waves-effect waves-light d-flex mb-2" style="width: max-content;"><i class="bx bx-left-arrow-alt fs-4"></i> </button>
+                        <h3 class="new-center-heading text-muted ml-3 ms-3">Center Reports</h3>
+                    </div>
 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col-md-3">
-                                            <div class="mb-3">
-                                                <!--<a href="javascript:void(0);" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-plus me-2"></i> Add New</a>-->
 
-                                                <h3 class="new-center-heading text-muted mb-0 mt-2">Center Reports</h3>
+                                    <div class="row mb-2">
+
+                                        <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                            <div style="width:100%;">
+                                                <lable>Select Center Type: </lable>
+                                            </div>
+                                            <div class="" style="width:100%;">
+                                                <select class="form-select" name="select_center_type" id="select_center_type">
+                                                    <option value="0">All</option>
+                                                    <option value="1">Owner</option>
+                                                    <option value="2">Partnership</option>
+                                                    <option value="3">Franchise</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Select Center Type: </lable>
-                                                </div>
-                                                <div class=" ms-2" style="width:70%;">
-                                                    <select class="form-select" name="select_center_type" id="select_center_type">
-                                                        <option value="0">All</option>
-                                                        <option value="1">Owner</option>
-                                                        <option value="2">Partnership</option>
-                                                        <option value="3">Franchise</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="mt-2" style="display:flex;align-items:center;">
-                                                <div style="width:30%;">
-                                                    <lable>Select Zone: </lable>
-                                                </div>
-                                                <div class=" ms-2" style="width:70%;">
-                                                    <select class="form-select" name="select_center_zone" id="select_center_zone">
-                                                        <option value="0">All</option>
-                                                        <option value="A">A</option>
-                                                        <option value="B">B</option>
-                                                        <option value="C">C</option>
-                                                        <option value="D">D</option>
-                                                        <option value="E">E</option>
-                                                        <option value="F">F</option>
-                                                        <option value="G">G</option>
-                                                        <option value="H">H</option>
 
-                                                    </select>
-                                                </div>
+                                        <!-- Zone wise filters -->
+                                        <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                            <div>
+                                                <lable>Select Zone: </lable>
+                                            </div>
+                                            <div class="" style="width:100%;">
+                                                <select class="form-select" name="select_center_zone" id="select_center_zone">
+                                                    <option value="0">All</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                    <option value="E">E</option>
+                                                    <option value="F">F</option>
+                                                    <option value="G">G</option>
+                                                    <option value="H">H</option>
+                                                </select>
                                             </div>
 
+                                        </div>
+
+                                        <!-- Manager name filter -->
+                                        <div class="col-md-4" style="display:flex;flex-direction:column;">
+                                            <div style="width: 100%;">
+                                                <lable>Select Manager Name: </lable>
+                                            </div>
+                                            <div style="width: 100%;">
+                                                <select class="form-select" id="select_manager_name">
+                                                    <option value="0">All</option>
+                                                    <?php
+                                                    $managerDetails = get_manager_details_case_center_type($DB);
+                                                    foreach ($managerDetails as $row) {
+                                                    ?>
+                                                        <option value="<?php echo ($row['manager_name']); ?>"><?php echo ($row['manager_name']); ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8">
                                             <div class="d-flex justify-content-between mt-3">
-                                                <div>
+                                                <div style="width: 100%;">Select Date</div>
+                                                <div style="width: 100%;">
                                                     <input type="date" name="center_date_from" class="form-control mydate" placeholder="Select Date From" value="" id="center_date_from">
                                                 </div>
 
-                                                <div class="ms-2">
+                                                <div class="ms-2" style="width: 100%;">
                                                     <input type="date" name="center_date_end" class="form-control mydate" placeholder="Select Date End" value="" id="center_date_end">
                                                 </div>
                                                 <div class="ms-2">
                                                     <button class="btn btn-primary clear_date">Clear</button>
                                                 </div>
-
                                             </div>
-
-
-
                                         </div>
 
-                                        <div class="col-md-4">
-
+                                        <div class="col-md-4" style="display: flex; justify-content:right;align-items:center;">
+                                            <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:center; ">
+                                                <div>
+                                                    <lable style="color:#003032; font-size:large;"><b>Centers Count</b> </lable>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <p class="text-end " style="color:#3980c0; font-size:medium; margin:0;" id="total_patients_retrived">100000</p>
+                                                </div>
+                                            </div>
                                         </div>
-
-
                                     </div>
                                     <!-- end row -->
                                     <div class="table-responsive mb-4">
@@ -196,12 +214,6 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
                     $("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
                     return nRow;
                 },
-                // "scrollY": "calc(100vh - 290px)",
-                // 			"rowCallback": function(nRow, aData, iDisplayIndex) {
-                // 				var oSettings = this.fnSettings();
-                // 				$("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
-                // 				return nRow;
-                // 			},
                 "columnDefs": [{
                         "orderable": false,
                         "targets": [0, 1, 2, 3]
@@ -235,51 +247,69 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
                         $("#center_master_table_processing").css("display", "none");
                     }
                 },
+
+                "initComplete": function(settings, json) {
+                    $("#total_patients_retrived").text(json.recordsFiltered);
+                },
                 bDestroy: true,
             });
 
             $('#search').keyup(function() {
                 dataTable.search($(this).val()).draw();
             });
-
-
         };
 
         mytable();
 
+        // Function to populate table values depending on center|| Franchise || Owner
         $('#select_center_type').on('change', function() {
+            var type = $(this).val();
+            var ajax2 = $.ajax({
+                url: "Auth/action_get_all_manager_details.php?list=" + type,
+                method: "GET",
+                dataType: "JSON",
+            }).done(function(result) {
+                $('#select_manager_name').html(result);
+            });
+
+            $.when(ajax2).done(function() {
+                mytable(); // Calling function when AJAX calls are completed
+            });
+        });
 
 
-
-
-            mytable();
-        })
-
+        // Populate manager name based on the zone type
         $('#select_center_zone').on('change', function() {
+            var zone = $(this).val();
+            var ajax1 = $.ajax({
+                url: "Auth/action_get_all_manager_details.php?zoneName=" + zone,
+                method: "GET",
+                dataType: 'JSON',
+            }).done(function(result) {
+                $("#select_manager_name").html(result);
+            })
+            $.when(ajax1).done(function() {
+                mytable();
+            })
+        });
+
+
+        // Populating data acc to Onchange of the manager name
+        $("#select_manager_name").on('change', function() {
             mytable();
-        })
-
-        // $('#select_center').on('change', function() {
-        //     mytable();
-        // })
-
-
+        });
 
         $('#center_date_from').on('change', function() {
             if ($('#center_date_end').val() != "") {
                 mytable();
             }
-
         })
 
         $('#center_date_end').on('change', function() {
             if ($('#center_date_from').val() != "") {
                 mytable();
             }
-
         })
-
-
 
         $('.clear_date').on('click', function() {
             $('#center_date_from').val("");
