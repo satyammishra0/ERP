@@ -158,13 +158,13 @@ if ($hid != '') {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 mt-4">
-                                            <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:space-between; ">
+                                        <div class="col-md-4 mt-4" style="display: flex; justify-content:right;align-items:center;">
+                                            <div class="pl-2 pr-2" style="display:flex; align-items:center; justify-content:center; ">
                                                 <div>
                                                     <lable style="color:#003032; font-size:large;"><b> <?= $report_type == 'ecp' ? "Total EECP Reports" : "Total SDT Reports" ?></b> </lable>
                                                 </div>
                                                 <div class="ms-2">
-                                                    <p class="text-end mt-2" style="color:#3980c0; font-size:medium;" id="total_patients_retrived">100000</p>
+                                                    <p class="text-end" style="color:#3980c0; font-size:medium;  margin:0;" id="total_patients_retrived">100000</p>
                                                 </div>
                                             </div>
                                         </div>

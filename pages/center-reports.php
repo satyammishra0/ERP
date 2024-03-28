@@ -239,7 +239,6 @@ if (!in_array('7', explode(',', $_SESSION['ERP_ACCESS']))) {
                     data: {
                         select_center_type: select_center_type,
                         select_center_zone: select_center_zone,
-                        // select_center: select_center,
                         center_date_from: center_date_from,
                         center_date_end: center_date_end,
                         manager_name: manager_name,
